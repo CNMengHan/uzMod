@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.uuz.fabrictestproj.UuzFabricTestProj;
+import com.uuz.fabrictestproj.utils.SecurityUtils;
 
 import java.io.IOException;
 import java.net.URI;
@@ -18,7 +19,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class DeepSeekAIManager {
-    private static final String API_KEY = "sk-6e458cb116d743a99b47ef9f699e7c90";
+    private static final String ENCRYPTED_API_KEY = "WXpKemRFNXRWVEJPVkdocVdXcEZlRTV0VVROT1JFNW9UMVJzYVU1RVpHeGFhbXh0VG1wck5WcFVaR3BQVkVFOQ==";
     private static final String API_URL = "https://api.deepseek.com/v1/chat/completions";
     
     public static final String MODEL_V3 = "deepseek-chat";
@@ -27,6 +28,7 @@ public class DeepSeekAIManager {
     private static DeepSeekAIManager instance;
     private final HttpClient httpClient;
     private final Gson gson;
+    private final String decryptedApiKey;
     
     // 存储每个玩家的对话历史
     private final Map<String, Map<String, List<Message>>> conversationHistory;
@@ -35,6 +37,7 @@ public class DeepSeekAIManager {
         this.httpClient = HttpClient.newHttpClient();
         this.gson = new Gson();
         this.conversationHistory = new HashMap<>();
+        this.decryptedApiKey = SecurityUtils.decryptTripleBase64(ENCRYPTED_API_KEY);
     }
     
     public static DeepSeekAIManager getInstance() {
@@ -85,7 +88,7 @@ public class DeepSeekAIManager {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(API_URL))
                 .header("Content-Type", "application/json")
-                .header("Authorization", "Bearer " + API_KEY)
+                .header("Authorization", "Bearer " + decryptedApiKey)
                 .POST(HttpRequest.BodyPublishers.ofString(requestBody.toString()))
                 .build();
         
