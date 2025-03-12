@@ -1,2 +1,23 @@
+# **Gradle 缓存**
 .gradle/
+build/
+run/
+
+# **IDE 配置文件**
+.idea/
+.vscode/
+
+# **Minecraft 运行时文件**
+logs/
+crash-reports/
+
+# **编译后的二进制文件**
+*.class
+*.jar
+*.war
+*.zip
+
+# **本地环境特定文件**
+.DS_Store
+Thumbs.db
 

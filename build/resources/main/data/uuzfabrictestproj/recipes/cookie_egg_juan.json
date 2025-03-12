@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smelting",
-  "ingredient": {
-    "item": "minecraft:egg"
-  },
-  "result": "uuzfabrictestproj:cookie_egg_juan",
-  "experience": 0.35,
-  "cookingtime": 200
-} 

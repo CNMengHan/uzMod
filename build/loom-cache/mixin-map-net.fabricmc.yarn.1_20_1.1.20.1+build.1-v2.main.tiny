@@ -1,8 +1,0 @@
-v1	named	intermediary
-FIELD	com/uuz/fabrictestproj/mixin/CreeperEntityMixin	I	currentFuseTime	field_7227
-FIELD	com/uuz/fabrictestproj/mixin/CreeperEntityMixin	I	fuseTime	field_7228
-FIELD	com/uuz/fabrictestproj/mixin/MobEntityMixin	Lnet/minecraft/entity/ai/goal/GoalSelector;	goalSelector	field_6201
-FIELD	com/uuz/fabrictestproj/mixin/MobEntityMixin	Lnet/minecraft/entity/ai/goal/GoalSelector;	targetSelector	field_6185
-METHOD	com/uuz/fabrictestproj/mixin/MobEntityMixin	()V	initGoals	method_5959
-METHOD	com/uuz/fabrictestproj/mixin/WorldMixin	()Lnet/minecraft/server/MinecraftServer;	getServer	method_8503
-METHOD	com/uuz/fabrictestproj/mixin/ZombieEntityMixin	()V	initGoals	method_5959
