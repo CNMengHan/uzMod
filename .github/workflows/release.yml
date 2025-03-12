@@ -1,0 +1,49 @@
+name: Release
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+      
+      - name: 验证Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+      
+      - name: 设置JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      
+      - name: 设置Gradle权限
+        run: chmod +x ./gradlew
+      
+      - name: 构建项目
+        run: ./gradlew build
+      
+      - name: 获取版本号
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+      
+      - name: 创建Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Release ${{ steps.get_version.outputs.VERSION }}
+          files: |
+            build/libs/*.jar
+          body: |
+            ## UuzFabricTestProj ${{ steps.get_version.outputs.VERSION }}
+            - Minecraft版本: 1.20.X
+            - Fabric Loader版本: 0.15.6
+            - Java版本: 17
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
