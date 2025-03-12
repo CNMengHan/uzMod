@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "ingredient": {
+    "item": "minecraft:egg"
+  },
+  "result": "uuzfabrictestproj:cookie_egg_juan",
+  "experience": 0.35,
+  "cookingtime": 100
+} 

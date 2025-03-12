@@ -1,0 +1,108 @@
+{
+  "mappings": {
+    "com/uuz/fabrictestproj/mixin/BatEntityMixin": {
+      "tick": "Lnet/minecraft/class_1420;method_5773()V"
+    },
+    "com/uuz/fabrictestproj/mixin/BlockMixin": {
+      "onBreak(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;Lnet/minecraft/entity/player/PlayerEntity;)V": "Lnet/minecraft/class_2248;method_9576(Lnet/minecraft/class_1937;Lnet/minecraft/class_2338;Lnet/minecraft/class_2680;Lnet/minecraft/class_1657;)V"
+    },
+    "com/uuz/fabrictestproj/mixin/BoatEntityMixin": {
+      "checkBoatInWater": "Lnet/minecraft/class_1690;method_7545()Z",
+      "tick": "Lnet/minecraft/class_1690;method_5773()V",
+      "updateVelocity": "Lnet/minecraft/class_1690;method_7534()V"
+    },
+    "com/uuz/fabrictestproj/mixin/BowItemMixin": {
+      "onStoppedUsing": "Lnet/minecraft/class_1753;method_7840(Lnet/minecraft/class_1799;Lnet/minecraft/class_1937;Lnet/minecraft/class_1309;I)V"
+    },
+    "com/uuz/fabrictestproj/mixin/ClientPlayerEntityMixin": {
+      "tickMovement": "Lnet/minecraft/class_746;method_6007()V"
+    },
+    "com/uuz/fabrictestproj/mixin/CreeperEntityMixin": {
+      "<init>": "Lnet/minecraft/class_1548;<init>(Lnet/minecraft/class_1299;Lnet/minecraft/class_1937;)V",
+      "tick": "Lnet/minecraft/class_1548;method_5773()V"
+    },
+    "com/uuz/fabrictestproj/mixin/EnderPearlItemMixin": {
+      "use": "Lnet/minecraft/class_1776;method_7836(Lnet/minecraft/class_1937;Lnet/minecraft/class_1657;Lnet/minecraft/class_1268;)Lnet/minecraft/class_1271;"
+    },
+    "com/uuz/fabrictestproj/mixin/ItemStackMixin": {
+      "finishUsing(Lnet/minecraft/world/World;Lnet/minecraft/entity/LivingEntity;)Lnet/minecraft/item/ItemStack;": "Lnet/minecraft/class_1799;method_7910(Lnet/minecraft/class_1937;Lnet/minecraft/class_1309;)Lnet/minecraft/class_1799;",
+      "getMaxUseTime()I": "Lnet/minecraft/class_1799;method_7935()I",
+      "getUseAction()Lnet/minecraft/util/UseAction;": "Lnet/minecraft/class_1799;method_7976()Lnet/minecraft/class_1839;"
+    },
+    "com/uuz/fabrictestproj/mixin/LivingEntityMixin": {
+      "damage": "Lnet/minecraft/class_1309;method_5643(Lnet/minecraft/class_1282;F)Z",
+      "onDeath": "Lnet/minecraft/class_1309;method_6078(Lnet/minecraft/class_1282;)V"
+    },
+    "com/uuz/fabrictestproj/mixin/MobEntityMixin": {
+      "<init>": "Lnet/minecraft/class_1308;<init>(Lnet/minecraft/class_1299;Lnet/minecraft/class_1937;)V"
+    },
+    "com/uuz/fabrictestproj/mixin/PersistentProjectileEntityMixin": {
+      "onBlockHit(Lnet/minecraft/util/hit/BlockHitResult;)V": "Lnet/minecraft/class_1665;method_24920(Lnet/minecraft/class_3965;)V",
+      "onEntityHit(Lnet/minecraft/util/hit/EntityHitResult;)V": "Lnet/minecraft/class_1665;method_7454(Lnet/minecraft/class_3966;)V"
+    },
+    "com/uuz/fabrictestproj/mixin/VillagerEntityMixin": {
+      "createChild": "Lnet/minecraft/class_1646;method_7225(Lnet/minecraft/class_3218;Lnet/minecraft/class_1296;)Lnet/minecraft/class_1646;",
+      "fillRecipes": "Lnet/minecraft/class_1646;method_7237()V"
+    },
+    "com/uuz/fabrictestproj/mixin/WorldMixin": {
+      "<init>": "Lnet/minecraft/class_3218;<init>(Lnet/minecraft/server/MinecraftServer;Ljava/util/concurrent/Executor;Lnet/minecraft/class_32$class_5143;Lnet/minecraft/class_5268;Lnet/minecraft/class_5321;Lnet/minecraft/class_5363;Lnet/minecraft/class_3949;ZJLjava/util/List;ZLnet/minecraft/class_8565;)V"
+    },
+    "com/uuz/fabrictestproj/mixin/ZombieEntityMixin": {
+      "<init>*": "Lnet/minecraft/class_1642;<init>(Lnet/minecraft/class_1299;Lnet/minecraft/class_1937;)V"
+    }
+  },
+  "data": {
+    "named:intermediary": {
+      "com/uuz/fabrictestproj/mixin/BatEntityMixin": {
+        "tick": "Lnet/minecraft/class_1420;method_5773()V"
+      },
+      "com/uuz/fabrictestproj/mixin/BlockMixin": {
+        "onBreak(Lnet/minecraft/world/World;Lnet/minecraft/util/math/BlockPos;Lnet/minecraft/block/BlockState;Lnet/minecraft/entity/player/PlayerEntity;)V": "Lnet/minecraft/class_2248;method_9576(Lnet/minecraft/class_1937;Lnet/minecraft/class_2338;Lnet/minecraft/class_2680;Lnet/minecraft/class_1657;)V"
+      },
+      "com/uuz/fabrictestproj/mixin/BoatEntityMixin": {
+        "checkBoatInWater": "Lnet/minecraft/class_1690;method_7545()Z",
+        "tick": "Lnet/minecraft/class_1690;method_5773()V",
+        "updateVelocity": "Lnet/minecraft/class_1690;method_7534()V"
+      },
+      "com/uuz/fabrictestproj/mixin/BowItemMixin": {
+        "onStoppedUsing": "Lnet/minecraft/class_1753;method_7840(Lnet/minecraft/class_1799;Lnet/minecraft/class_1937;Lnet/minecraft/class_1309;I)V"
+      },
+      "com/uuz/fabrictestproj/mixin/ClientPlayerEntityMixin": {
+        "tickMovement": "Lnet/minecraft/class_746;method_6007()V"
+      },
+      "com/uuz/fabrictestproj/mixin/CreeperEntityMixin": {
+        "<init>": "Lnet/minecraft/class_1548;<init>(Lnet/minecraft/class_1299;Lnet/minecraft/class_1937;)V",
+        "tick": "Lnet/minecraft/class_1548;method_5773()V"
+      },
+      "com/uuz/fabrictestproj/mixin/EnderPearlItemMixin": {
+        "use": "Lnet/minecraft/class_1776;method_7836(Lnet/minecraft/class_1937;Lnet/minecraft/class_1657;Lnet/minecraft/class_1268;)Lnet/minecraft/class_1271;"
+      },
+      "com/uuz/fabrictestproj/mixin/ItemStackMixin": {
+        "finishUsing(Lnet/minecraft/world/World;Lnet/minecraft/entity/LivingEntity;)Lnet/minecraft/item/ItemStack;": "Lnet/minecraft/class_1799;method_7910(Lnet/minecraft/class_1937;Lnet/minecraft/class_1309;)Lnet/minecraft/class_1799;",
+        "getMaxUseTime()I": "Lnet/minecraft/class_1799;method_7935()I",
+        "getUseAction()Lnet/minecraft/util/UseAction;": "Lnet/minecraft/class_1799;method_7976()Lnet/minecraft/class_1839;"
+      },
+      "com/uuz/fabrictestproj/mixin/LivingEntityMixin": {
+        "damage": "Lnet/minecraft/class_1309;method_5643(Lnet/minecraft/class_1282;F)Z",
+        "onDeath": "Lnet/minecraft/class_1309;method_6078(Lnet/minecraft/class_1282;)V"
+      },
+      "com/uuz/fabrictestproj/mixin/MobEntityMixin": {
+        "<init>": "Lnet/minecraft/class_1308;<init>(Lnet/minecraft/class_1299;Lnet/minecraft/class_1937;)V"
+      },
+      "com/uuz/fabrictestproj/mixin/PersistentProjectileEntityMixin": {
+        "onBlockHit(Lnet/minecraft/util/hit/BlockHitResult;)V": "Lnet/minecraft/class_1665;method_24920(Lnet/minecraft/class_3965;)V",
+        "onEntityHit(Lnet/minecraft/util/hit/EntityHitResult;)V": "Lnet/minecraft/class_1665;method_7454(Lnet/minecraft/class_3966;)V"
+      },
+      "com/uuz/fabrictestproj/mixin/VillagerEntityMixin": {
+        "createChild": "Lnet/minecraft/class_1646;method_7225(Lnet/minecraft/class_3218;Lnet/minecraft/class_1296;)Lnet/minecraft/class_1646;",
+        "fillRecipes": "Lnet/minecraft/class_1646;method_7237()V"
+      },
+      "com/uuz/fabrictestproj/mixin/WorldMixin": {
+        "<init>": "Lnet/minecraft/class_3218;<init>(Lnet/minecraft/server/MinecraftServer;Ljava/util/concurrent/Executor;Lnet/minecraft/class_32$class_5143;Lnet/minecraft/class_5268;Lnet/minecraft/class_5321;Lnet/minecraft/class_5363;Lnet/minecraft/class_3949;ZJLjava/util/List;ZLnet/minecraft/class_8565;)V"
+      },
+      "com/uuz/fabrictestproj/mixin/ZombieEntityMixin": {
+        "<init>*": "Lnet/minecraft/class_1642;<init>(Lnet/minecraft/class_1299;Lnet/minecraft/class_1937;)V"
+      }
+    }
+  }
+}
