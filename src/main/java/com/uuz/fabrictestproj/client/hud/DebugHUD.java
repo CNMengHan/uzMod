@@ -16,6 +16,7 @@ import org.apache.logging.log4j.core.layout.PatternLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class DebugHUD implements HudRenderCallback {
     private static final int MAX_LINES = 50; // 最大显示行数
@@ -26,7 +27,8 @@ public class DebugHUD implements HudRenderCallback {
     private static final float SCALE = 1.0f; // 缩放比例
     
     private static final DebugHUD INSTANCE = new DebugHUD();
-    private final List<String> debugMessages = new ArrayList<>();
+    // 使用线程安全的CopyOnWriteArrayList替代ArrayList
+    private final List<String> debugMessages = new CopyOnWriteArrayList<>();
     private boolean visible = false;
     
     private DebugHUD() {
@@ -71,10 +73,20 @@ public class DebugHUD implements HudRenderCallback {
             message = message.substring(0, MAX_LINE_LENGTH - 3) + "...";
         }
         
+        // CopyOnWriteArrayList是线程安全的，不需要额外的同步
         debugMessages.add(message);
+        
         // 保持消息数量在限制之内
         while (debugMessages.size() > MAX_LINES) {
-            debugMessages.remove(0);
+            try {
+                // 安全地移除第一个元素
+                if (!debugMessages.isEmpty()) {
+                    debugMessages.remove(0);
+                }
+            } catch (IndexOutOfBoundsException e) {
+                // 忽略可能的并发修改异常
+                break;
+            }
         }
     }
     
@@ -93,7 +105,11 @@ public class DebugHUD implements HudRenderCallback {
         context.getMatrices().scale(SCALE, SCALE, 1.0f);
         
         int y = (int)(MARGIN_TOP / SCALE);
-        for (String message : debugMessages) {
+        
+        // 创建一个消息列表的快照，避免在渲染过程中发生并发修改
+        List<String> messagesToRender = new ArrayList<>(debugMessages);
+        
+        for (String message : messagesToRender) {
             if (message != null) {  // 添加空值检查
                 context.drawTextWithShadow(
                     client.textRenderer,

@@ -2,6 +2,7 @@ package com.uuz.fabrictestproj.handler;
 
 import com.uuz.fabrictestproj.UuzFabricTestProj;
 import com.uuz.fabrictestproj.enchantment.FireballEnchantment;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,10 +15,13 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.entity.EntityType;
+import net.minecraft.server.world.ServerWorld;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.Iterator;
 
 /**
  * 火球术附魔处理器
@@ -26,14 +30,16 @@ public class FireballHandler {
     
     // 冷却时间（ticks）
     private static final int COOLDOWN_TICKS = 20; // 1秒
-    
-    // 玩家冷却时间映射
     private static final Map<UUID, Long> playerCooldowns = new HashMap<>();
+    
+    // 使用ConcurrentHashMap替代WeakHashMap，避免并发修改异常
+    private static final Map<FireballEntity, Vec3d> fireballVelocities = new ConcurrentHashMap<>();
     
     /**
      * 注册火球术处理器
      */
     public static void register() {
+        // 注册使用物品回调
         UseItemCallback.EVENT.register((player, world, hand) -> {
             if (!world.isClient) {
                 ItemStack stack = player.getStackInHand(hand);
@@ -58,6 +64,27 @@ public class FireballHandler {
             return TypedActionResult.pass(player.getStackInHand(hand));
         });
         
+        // 注册服务器tick事件，用于维持火球速度
+        ServerTickEvents.END_WORLD_TICK.register(world -> {
+            // 使用迭代器安全地移除元素
+            Iterator<Map.Entry<FireballEntity, Vec3d>> iterator = fireballVelocities.entrySet().iterator();
+            while (iterator.hasNext()) {
+                Map.Entry<FireballEntity, Vec3d> entry = iterator.next();
+                FireballEntity fireball = entry.getKey();
+                Vec3d velocity = entry.getValue();
+                
+                // 如果火球已经不存在或已经被移除，则从映射中移除
+                if (fireball == null || fireball.isRemoved()) {
+                    iterator.remove();
+                    continue;
+                }
+                
+                // 重新设置火球的速度，确保匀速运动
+                fireball.setVelocity(velocity.x, velocity.y, velocity.z);
+                fireball.setNoGravity(true);
+            }
+        });
+        
         UuzFabricTestProj.LOGGER.info("火球术处理器已注册");
     }
     
@@ -75,14 +102,23 @@ public class FireballHandler {
             world
         );
         
-        // 设置火球的位置和速度
+        // 设置火球的位置
         fireball.setPosition(pos.x, pos.y, pos.z);
-        fireball.setVelocity(player, player.getPitch(), player.getYaw(), 0.0F, 1.5F, 1.0F);
+        
+        // 计算火球的速度向量 - 使用玩家的视线方向
+        double speed = 1.5; // 火球速度
+        Vec3d velocity = rotation.multiply(speed);
+        
+        // 直接设置火球的速度向量
+        fireball.setVelocity(velocity.x, velocity.y, velocity.z);
+        
+        // 设置火球不受重力影响
+        fireball.setNoGravity(true);
         
         // 设置火球的属性
         fireball.setOwner(player);
         
-        // 使用反射设置爆炸威力
+        // 设置爆炸威力
         try {
             java.lang.reflect.Field explosionPowerField = FireballEntity.class.getDeclaredField("explosionPower");
             explosionPowerField.setAccessible(true);
@@ -91,7 +127,11 @@ public class FireballHandler {
             UuzFabricTestProj.LOGGER.error("设置火球爆炸威力失败", e);
         }
         
+        // 将火球添加到世界中
         world.spawnEntity(fireball);
+        
+        // 将火球和其速度添加到跟踪映射中
+        fireballVelocities.put(fireball, velocity);
     }
     
     /**

@@ -134,8 +134,5 @@ public class UuzFabricTestProj implements ModInitializer {
 		
 		// 注册无限箭矢处理器
 		InfiniteArrowsHandler.register();
-		
-		LOGGER.info("村民随机交易系统已初始化");
-		LOGGER.info("UuzFabricTestProj 初始化完成");
 	}
 }
