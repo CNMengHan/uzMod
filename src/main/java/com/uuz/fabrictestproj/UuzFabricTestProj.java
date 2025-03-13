@@ -18,6 +18,7 @@ import com.uuz.fabrictestproj.command.ChatCommand;
 import com.uuz.fabrictestproj.command.SummonCommand;
 import com.uuz.fabrictestproj.command.BoatFlyCommand;
 import com.uuz.fabrictestproj.command.VillagerFoodCommand;
+import com.uuz.fabrictestproj.command.FindChunkDoorAndVillagerCommand;
 import com.uuz.fabrictestproj.handler.EnderTeleportHandler;
 import com.uuz.fabrictestproj.item.ModItems;
 import com.uuz.fabrictestproj.network.CatDropPacket;
@@ -72,6 +73,7 @@ public class UuzFabricTestProj implements ModInitializer {
 			SummonCommand.register(dispatcher, registryAccess);
 			BoatFlyCommand.register(dispatcher);
 			VillagerFoodCommand.register(dispatcher);
+			FindChunkDoorAndVillagerCommand.register(dispatcher);
 		});
 
 		// 注册网络包
