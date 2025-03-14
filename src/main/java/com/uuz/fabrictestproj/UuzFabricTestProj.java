@@ -19,6 +19,7 @@ import com.uuz.fabrictestproj.command.SummonCommand;
 import com.uuz.fabrictestproj.command.BoatFlyCommand;
 import com.uuz.fabrictestproj.command.VillagerFoodCommand;
 import com.uuz.fabrictestproj.command.FindChunkDoorAndVillagerCommand;
+import com.uuz.fabrictestproj.command.BadOmenCommand;
 import com.uuz.fabrictestproj.handler.EnderTeleportHandler;
 import com.uuz.fabrictestproj.item.ModItems;
 import com.uuz.fabrictestproj.network.CatDropPacket;
@@ -41,6 +42,8 @@ import com.uuz.fabrictestproj.enchantment.FireballEnchantment;
 import com.uuz.fabrictestproj.handler.FireballHandler;
 import com.uuz.fabrictestproj.handler.MobDropHandler;
 import com.uuz.fabrictestproj.handler.InfiniteArrowsHandler;
+import com.uuz.fabrictestproj.handler.SpiderWebHandler;
+import com.uuz.fabrictestproj.handler.HourlyBadOmenHandler;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
@@ -74,6 +77,7 @@ public class UuzFabricTestProj implements ModInitializer {
 			BoatFlyCommand.register(dispatcher);
 			VillagerFoodCommand.register(dispatcher);
 			FindChunkDoorAndVillagerCommand.register(dispatcher);
+			BadOmenCommand.register(dispatcher);
 		});
 
 		// 注册网络包
@@ -136,5 +140,13 @@ public class UuzFabricTestProj implements ModInitializer {
 		
 		// 注册无限箭矢处理器
 		InfiniteArrowsHandler.register();
+		
+		// 注册蜘蛛网处理器
+		SpiderWebHandler.register();
+		
+		// 注册每小时不祥之兆处理器
+		HourlyBadOmenHandler.register();
+
+		// 这里不加日志了qwq
 	}
 }
